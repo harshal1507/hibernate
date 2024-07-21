@@ -1,0 +1,24 @@
+package com.hibernate.concepts.access;
+
+import com.hibernate.concepts.ProxyDesignPatternConcept.FlipkartService;
+import com.hibernate.concepts.ProxyDesignPatternConcept.FlipkartServiceImpl;
+import com.hibernate.concepts.ProxyDesignPatternConcept.FlipkartServiceProxy;
+
+public class ECommerceFactory {
+
+	// it will either give real or proxy object
+	public FlipkartService getInstance(String couponCode) {
+		
+		if(couponCode.equals("") || couponCode.trim().length()==0) {
+			return new FlipkartServiceImpl();
+		}else {
+			if(couponCode.equalsIgnoreCase("coder20")) {
+				return new FlipkartServiceProxy(20);
+			}else if(couponCode.equalsIgnoreCase("coder10")) {
+				return new FlipkartServiceProxy(10);
+			}else {
+				return new FlipkartServiceImpl();
+			}
+		}
+	}
+}

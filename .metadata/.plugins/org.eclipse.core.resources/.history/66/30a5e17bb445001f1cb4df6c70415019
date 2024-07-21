@@ -1,0 +1,5 @@
+package com.hibernate.concepts;
+
+public class HibernateTest {
+
+}

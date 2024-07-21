@@ -1,0 +1,24 @@
+package com.hibernate.concepts;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+public class HibernateTest {
+
+	public static void main(String[] args) {
+		
+		// configuration
+		Configuration config = null;
+		SessionFactory sessionFactory = null;
+		Session session = null;
+		
+		
+		config = new Configuration();
+		config.configure("com/hibernate/concepts/config/hibernate.cfg.xml");
+		
+		sessionFactory = config.buildSessionFactory();
+		
+		session = sessionFactory.openSession();
+	}
+}

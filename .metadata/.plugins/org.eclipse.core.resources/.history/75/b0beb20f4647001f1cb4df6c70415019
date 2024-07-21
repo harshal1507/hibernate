@@ -1,0 +1,14 @@
+package com.hibernate.concepts;
+
+public class HibernateDialect {
+
+	/*
+	 * Dialect - responsible for query generation (query is generated while commiting the transction)
+	 * 
+	 * There are two types of queries 
+	 * 		1. Pre generated query
+	 * 		2. Dynamically generated query
+	 * 
+	 * 
+	 */
+}

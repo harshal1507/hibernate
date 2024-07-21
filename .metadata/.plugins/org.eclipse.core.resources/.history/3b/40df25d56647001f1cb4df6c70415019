@@ -1,0 +1,5 @@
+package com.hibernate.concepts.access;
+
+public class ECommerceFactory {
+
+}

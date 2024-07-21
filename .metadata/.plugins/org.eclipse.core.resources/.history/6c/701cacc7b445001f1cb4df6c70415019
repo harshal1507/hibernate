@@ -1,0 +1,13 @@
+package com.hibernate.concepts;
+
+import java.lang.module.Configuration;
+
+public class HibernateTest {
+
+	public static void main(String[] args) {
+		
+		// configuration
+		Configuration config = null;
+		
+	}
+}

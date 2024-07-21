@@ -1,0 +1,54 @@
+package com.hibernate.concepts;
+
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+
+import com.hibernate.concepts.entity.Product;
+
+public class HibernateTest {
+
+	public static void main(String[] args) {
+		
+		// configuration
+		Configuration config = null;
+		SessionFactory sessionFactory = null;
+		Session session = null;
+		Transaction transaction = null;
+		Product product = null;
+		
+		config = new Configuration();
+		System.out.println(config.getProperties());
+		
+		
+		// loads only configuration file and not mapping file
+		// if path not provided then it will check in source folder by name - hibernate.cfg.xml
+		config.configure("com/hibernate/concepts/config/hibernate.cfg.xml");
+		System.out.println(config.getProperties());
+		
+		
+		// 
+		sessionFactory = config.buildSessionFactory();
+		session = sessionFactory.openSession();
+		
+		product = new Product(21,"Laptop",1000f, 10f);
+		
+		try {
+			transaction = session.beginTransaction();
+			session.save(product);
+			
+			// all non select transactions should be committed 
+			transaction.commit();
+			System.out.println("Object is saved !!");
+			
+		} catch (HibernateException e) {
+			e.printStackTrace();
+		}finally {
+			session.clear();
+			sessionFactory.close();
+		}
+		
+	}
+}
