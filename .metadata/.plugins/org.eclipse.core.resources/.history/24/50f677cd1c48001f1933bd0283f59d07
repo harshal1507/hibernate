@@ -1,0 +1,38 @@
+package com.hibernate.concepts;
+
+public class LoadingData {
+
+	// loading the data or record from database and storing it in entity class object
+	
+	// an entity is representing a database table
+	// object of entity class is representing 1 record in database table
+	
+	// we give objects to hibernate then internally to JDBC and then save it to database 
+	// in a similar fashion we get a record back from database
+	
+	
+	/*
+	 * To fetch data we can use two methods
+	 * 
+	 * 1. session.get(-- , --)
+	 * 2. session.load(-- , --)
+	 * 
+	*/
+	
+	/*
+	 * session.get(--,--)
+	 * 
+	 * 1. It performs the eager loading of the object  -- puts load on database
+	 * 		a. eager loading meaning - whether you use the object or not, get method will load the object
+	 * 
+	 * 
+	 * session.load(--,--)
+	 * 
+	 * 1. It can perform both eager or lazy loading of the object at once
+	 * 		a. when you are using the object it will load
+	 * 		b. by default lazy loading is true - we can change also
+	 * 
+	*/
+	
+	
+}

@@ -9,6 +9,12 @@ public class Product implements Serializable{
 	private float price;
 	private float qty;
 	
+	
+	
+	public Product() {
+		super();
+	}
+
 	public Product(int pid, String pname, float price, float qty) {
 		this.pid = pid;
 		this.pname = pname;
@@ -39,6 +45,11 @@ public class Product implements Serializable{
 	}
 	public void setQty(float qty) {
 		this.qty = qty;
+	}
+
+	@Override
+	public String toString() {
+		return "Product [pid=" + pid + ", pname=" + pname + ", price=" + price + ", qty=" + qty + "]";
 	}
 	
 	
