@@ -1,0 +1,87 @@
+package com.hibernate.concepts;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+
+import com.hibernate.concepts.entity.Product;
+
+public class LoadingDataUsingLoadMethod_6 {
+
+	/*
+	 * session.load(--,--) 
+	 * 
+	 * ID is taken as criteria value for all single row operation in hibernate.
+	 * 
+	 * dynamic-select and dynamic-delete for session.load() and for session.get() is not generated dynamically,
+	 * They are pre-generated queries.
+	 * 
+	 * If we want to perform row operations in bulk, then you should go for HQL, NativeSQL, Criteria API.
+	*/
+	
+	
+	/*
+	 * It can perform both eager and lazy loading of object.
+	 * 
+	 * If lazy="true" (attribute) is used then it performs lazy loading (by default it is true)
+	 * If lazy="false" is used then it performs eager loading
+	 * 
+	 * Internally it uses proxy design pattern.
+	 * 
+	*/
+	
+	
+	/*
+	 * When session.load(--,--) gets called:
+	 * 
+	 * ------------lazy=true--------------
+	 * 1. 	Product obj = session.load(Product.class,1);
+	 * 
+	 * 2. 	It generates InMemory Class of real Entity class as sub-class of real class by the help of javaasist lib.
+	 * 		And then creates the object for that proxy class. this proxy class object will have : id value and a refernce variable 
+	 * 		pointing to it's real class
+	 * 
+	 * 		Let's assume: Product$$Proxy ==> proxyObj having id value and Product realProduct = null;
+	 * 
+	 * 3. 	When you call the non-identifier method (non-identifier meaning without id ex: getName(), getPrice())
+	 * 		on proxy object
+	 * 
+	 * 		proxyObj.getName(); --> this will use pre-generated SQL 'SELECT' query having id value as criteria value.
+	 * 
+	 * 4. 	The query will run on database and fetch the data.
+	 * 
+	 * 5. 	After hitting the database, it will give the ResultSet.
+	 * 
+	 * 6. 	Now object of real class entity will be created and set the value from resultSet.
+	 * 		Product$$Proxy = realObject
+	 * 
+	 * 7. 	You have already called proxy.getName() --> Internally it will get value from realEntity obj refernce 
+	 * 		which is present inside proxy class object.
+	 * 
+	 * 8. 	Now suppose we have called proxy.getPrice() then it won't go to database again as the entity object is already present
+	 * 		in InMemory class now with it's real object -- so here the database call is saved 
+	 * 
+	*/
+	
+	public static void main(String[] args) {
+		Configuration config = null;
+		SessionFactory sessionFactory = null;
+		Session session = null;
+		Transaction txn = null;
+		
+		config = new Configuration();
+		config.configure("com/hibernate/concepts/config/hibernate.cfg.xml");
+		
+		sessionFactory = config.buildSessionFactory();
+		session = sessionFactory.openSession();
+		
+		// by default session.load() does lazy loading
+		Product productObject = session.load(Product.class, 1);
+		System.out.println(productObject.toString());
+		
+		// non identifier method -- get value from real entity object
+		System.out.println(productObject.getPname());
+		System.out.println(productObject.getPname());
+	}
+}

@@ -1,0 +1,10 @@
+package com.hibernate.concepts;
+
+public class LoadingDataUsingLoadMethod_6 {
+
+	
+	
+	public static void main(String[] args) {
+		
+	}
+}

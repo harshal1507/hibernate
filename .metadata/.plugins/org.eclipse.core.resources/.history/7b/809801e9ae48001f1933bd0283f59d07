@@ -1,0 +1,39 @@
+package com.hibernate.concepts;
+
+public class LoadingDataUsingLoadMethod_6 {
+
+	/*
+	 * session.load(--,--) 
+	 * 
+	 * ID is taken as criteria value for all single row operation in hibernate.
+	 * 
+	 * dynamic-select and dynamic-delete for session.load() and for session.get() is not generated dynamically,
+	 * They are pre-generated queries.
+	 * 
+	 * If we want to perform row operations in bulk, then you should go for HQL, NativeSQL, Criteria API.
+	*/
+	
+	
+	/*
+	 * It can perform both eager and lazy loading of object.
+	 * 
+	 * If lazy="true" (attribute) is used then it performs lazy loading (by default it is true)
+	 * If lazy="false" is used then it performs eager loading
+	 * 
+	 * Internally it uses proxy design pattern.
+	 * 
+	*/
+	
+	
+	/*
+	 * When session.load(--,--) gets called:
+	 * 
+	 * ------------lazy=true--------------
+	 * Product obj = session.load(Product.class,1);
+	 * 
+	*/
+	
+	public static void main(String[] args) {
+		
+	}
+}
